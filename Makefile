@@ -11,6 +11,7 @@ install: ## Install stack, assets and vendors
 	$(DOCKER_COMPOSE) build
 	$(DOCKER_COMPOSE) up -d
 	bin/composer install
+	php bin/console d:m:m -n
 	$(DOCKER_COMPOSE) down
 
 start: ## Start the stack (you can access the project on localhost:8080 after that)
