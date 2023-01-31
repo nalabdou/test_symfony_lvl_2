@@ -5,7 +5,7 @@ namespace App\Domain\Entity;
 use App\Domain\Exception\ValidationException;
 use Symfony\Component\Uid\Uuid;
 
-final class Player
+class Player
 {
     private Uuid $id;
 
