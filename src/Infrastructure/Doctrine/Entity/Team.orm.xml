@@ -8,5 +8,6 @@
         <id name="id" type="uuid" column="id">
         </id>
         <field name="name" column="name" type="string" length="255" nullable="false" unique="true"/>
+        <many-to-many field="players" mapped-by="teams" target-entity="App\Domain\Entity\Player"/>
     </entity>
 </doctrine-mapping>

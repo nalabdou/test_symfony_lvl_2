@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Doctrine\Repository;
 
+use App\Domain\Entity\Player;
 use App\Domain\Entity\Team;
-use App\Domain\Repository\TeamRepository as RepositoryTeamRepository;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Domain\Repository\TeamRepository as RepositoryTeamRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Team|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,8 +18,10 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 final class TeamRepository extends ServiceEntityRepository implements RepositoryTeamRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        private readonly PlayerRepository $playerRepository
+    ) {
         parent::__construct($registry, Team::class);
     }
 
@@ -48,5 +51,16 @@ final class TeamRepository extends ServiceEntityRepository implements Repository
             ->orderBy('t.name', Criteria::ASC)
             ->getQuery()
             ->getArrayResult();
+    }
+
+    public function addPlayer(Team $team, Player $player, ?bool $flush = false): void
+    {
+        $team->addPlayer($player);
+        $player->addTeam($team);
+        $this->_em->persist($team);
+
+        if ($flush) {
+            $this->_em->flush();
+        }
     }
 }
