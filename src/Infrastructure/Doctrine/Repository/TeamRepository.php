@@ -63,4 +63,18 @@ final class TeamRepository extends ServiceEntityRepository implements Repository
             $this->_em->flush();
         }
     }
+
+    /**
+     * @param Team[] $teams
+     * @return Team[]
+     */
+    public function findAllWithout(array $teams): array
+    {
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.name', Criteria::ASC)
+            ->andWhere('t.id NOT IN(:teams)')
+            ->setParameter('teams', \array_map(static fn (Team $team) => $team->getId(), $teams))
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
+use App\Domain\Entity\Game;
+use Symfony\Component\Uid\Uuid;
+use Doctrine\Common\Collections\Collection;
 use App\Domain\Exception\ValidationException;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Uid\Uuid;
 
 class Team implements \Stringable
 {
@@ -17,7 +18,9 @@ class Team implements \Stringable
     public function __construct(
         private readonly Uuid $id,
         private readonly string $name,
-        private Collection $players = new ArrayCollection()
+        private Collection $players = new ArrayCollection(),
+        private Collection $homeGames = new ArrayCollection(),
+        private Collection $awayGames = new ArrayCollection(),
     ) {
         if (\mb_strlen($name) > 255) {
             throw new ValidationException("Name must have less than 255 characters.");
@@ -56,6 +59,44 @@ class Team implements \Stringable
     {
         if ($this->players->contains($player)) {
             $this->players->removeElement($player);
+        }
+    }
+
+    public function getHomeGames(): Collection
+    {
+        return $this->homeGames;
+    }
+
+    public function addHomeGame(Game $homeGame): void
+    {
+        if (!$this->homeGames->contains($homeGame)) {
+            $this->homeGames->add($homeGame);
+        }
+    }
+
+    public function removeHomeGame(Game $homeGame): void
+    {
+        if ($this->homeGames->contains($homeGame)) {
+            $this->homeGames->removeElement($homeGame);
+        }
+    }
+
+    public function getAwayGames(): Collection
+    {
+        return $this->awayGames;
+    }
+
+    public function addAwayGame(Game $awayGame): void
+    {
+        if (!$this->awayGames->contains($awayGame)) {
+            $this->awayGames->add($awayGame);
+        }
+    }
+
+    public function removeAwayGame(Game $awayGame): void
+    {
+        if ($this->awayGames->contains($awayGame)) {
+            $this->awayGames->removeElement($awayGame);
         }
     }
 

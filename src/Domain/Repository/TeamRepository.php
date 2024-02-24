@@ -19,4 +19,9 @@ interface TeamRepository
     public function findToDisplay(): array;
 
     public function addPlayer(Team $team, Player $player, ?bool $flush = false): void;
+
+    /**
+     * @return Team[]
+     */
+    public function findAllWithout(array $teams): array;
 }
