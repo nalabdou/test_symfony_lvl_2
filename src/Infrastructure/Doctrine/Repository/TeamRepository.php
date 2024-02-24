@@ -6,10 +6,10 @@ namespace App\Infrastructure\Doctrine\Repository;
 
 use App\Domain\Entity\Player;
 use App\Domain\Entity\Team;
-use Doctrine\Common\Collections\Criteria;
-use Doctrine\Persistence\ManagerRegistry;
 use App\Domain\Repository\TeamRepository as RepositoryTeamRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Team|null find($id, $lockMode = null, $lockVersion = null)
@@ -33,6 +33,7 @@ final class TeamRepository extends ServiceEntityRepository implements Repository
             $this->_em->flush();
         }
     }
+
     /**
      * @return Team[]
      */
@@ -66,6 +67,7 @@ final class TeamRepository extends ServiceEntityRepository implements Repository
 
     /**
      * @param Team[] $teams
+     *
      * @return Team[]
      */
     public function findAllWithout(array $teams): array

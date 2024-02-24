@@ -21,6 +21,7 @@ class UseCase
     public function execute(Request $request): Response
     {
         $this->gameRepository->create($game = (new Game(Uuid::v4(), $request->getName(), $request->getHomeTeam(), $request->getAwayTeam())), true);
+
         return new Response($game->getId());
     }
 }

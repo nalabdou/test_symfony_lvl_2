@@ -44,7 +44,7 @@ class GetGamesCommandTest extends KernelTestCase
 
     public function randomInput(): \Generator
     {
-        for ($i = 0; $i < 18; $i++) {
+        for ($i = 0; $i < 18; ++$i) {
             yield [\random_int(0, 18)];
         }
     }

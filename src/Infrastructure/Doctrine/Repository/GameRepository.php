@@ -6,10 +6,10 @@ namespace App\Infrastructure\Doctrine\Repository;
 
 use App\Domain\Entity\Game;
 use App\Domain\Entity\Team;
-use Doctrine\Common\Collections\Criteria;
-use Doctrine\Persistence\ManagerRegistry;
 use App\Domain\Repository\GameRepository as RepositoryGameRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Game|null find($id, $lockMode = null, $lockVersion = null)

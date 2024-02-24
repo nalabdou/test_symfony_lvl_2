@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Tests\UseCase;
 
 use App\Infrastructure\Symfony\Command\CreateGameCommand;
-use App\Infrastructure\Symfony\Command\CreateTeamCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;
@@ -46,15 +45,13 @@ class CreateGameCommandTest extends KernelTestCase
         $this->assertSame(Command::FAILURE, $r);
     }
 
-
-
     public function gamesProvider(): \Generator
     {
-        yield [["Champions League Semi-Final Leg 1", \random_int(0, 18), \random_int(0, 17)]];
-        yield [["Champions League Semi-Final Leg 2", \random_int(0, 18), \random_int(0, 17)]];
-        yield [["Europa League Semi-Final Leg 1", \random_int(0, 18), \random_int(0, 17)]];
-        yield [["Europa League Semi-Final Leg 2", \random_int(0, 18), \random_int(0, 17)]];
-        yield [["FA Cup Semi-Final 1", \random_int(0, 18), \random_int(0, 17)]];
-        yield [["FA Cup Semi-Final 2", \random_int(0, 18), \random_int(0, 17)]];
+        yield [['Champions League Semi-Final Leg 1', \random_int(0, 18), \random_int(0, 17)]];
+        yield [['Champions League Semi-Final Leg 2', \random_int(0, 18), \random_int(0, 17)]];
+        yield [['Europa League Semi-Final Leg 1', \random_int(0, 18), \random_int(0, 17)]];
+        yield [['Europa League Semi-Final Leg 2', \random_int(0, 18), \random_int(0, 17)]];
+        yield [['FA Cup Semi-Final 1', \random_int(0, 18), \random_int(0, 17)]];
+        yield [['FA Cup Semi-Final 2', \random_int(0, 18), \random_int(0, 17)]];
     }
 }

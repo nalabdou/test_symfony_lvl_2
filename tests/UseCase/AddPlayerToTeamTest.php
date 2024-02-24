@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Tests\UseCase;
 
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Tester\CommandTester;
+use App\Infrastructure\Symfony\Command\AddPlayerToTeamCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use App\Infrastructure\Symfony\Command\AddPlayerToTeamCommand;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * @depends App\Tests\UseCase\CreateTeamTest::testExecute
@@ -34,7 +34,7 @@ class AddPlayerToTeamTest extends KernelTestCase
 
     public function randomInputs(): \Generator
     {
-        for ($i = 0; $i < 18; $i++) {
+        for ($i = 0; $i < 18; ++$i) {
             yield [[\random_int(0, 19), \random_int(0, 18)]];
         }
     }

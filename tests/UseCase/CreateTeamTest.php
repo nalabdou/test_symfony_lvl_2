@@ -57,28 +57,26 @@ class CreateTeamTest extends KernelTestCase
         $this->assertSame(Command::FAILURE, $r);
     }
 
-
-
     public function teamsProvider(): \Generator
     {
-        yield ["RC Strasbourg"];
-        yield ["Paris Saint-Germain"];
-        yield ["Olympique de Marseille"];
-        yield ["Lille OSC"];
-        yield ["AS Monaco"];
-        yield ["Olympique Lyonnais"];
-        yield ["Stade Rennais"];
-        yield ["OGC Nice"];
-        yield ["FC Nantes"];
-        yield ["Montpellier HSC"];
-        yield ["RC Lens"];
-        yield ["Stade Brestois"];
-        yield ["AS Saint-Étienne"];
-        yield ["Angers SCO"];
-        yield ["FC Metz"];
-        yield ["FC Girondins de Bordeaux"];
-        yield ["Stade de Reims"];
-        yield ["Nîmes Olympique"];
-        yield ["FC Lorient"];
+        yield ['RC Strasbourg'];
+        yield ['Paris Saint-Germain'];
+        yield ['Olympique de Marseille'];
+        yield ['Lille OSC'];
+        yield ['AS Monaco'];
+        yield ['Olympique Lyonnais'];
+        yield ['Stade Rennais'];
+        yield ['OGC Nice'];
+        yield ['FC Nantes'];
+        yield ['Montpellier HSC'];
+        yield ['RC Lens'];
+        yield ['Stade Brestois'];
+        yield ['AS Saint-Étienne'];
+        yield ['Angers SCO'];
+        yield ['FC Metz'];
+        yield ['FC Girondins de Bordeaux'];
+        yield ['Stade de Reims'];
+        yield ['Nîmes Olympique'];
+        yield ['FC Lorient'];
     }
 }

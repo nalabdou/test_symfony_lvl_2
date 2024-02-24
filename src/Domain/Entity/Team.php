@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
-use App\Domain\Entity\Game;
-use Symfony\Component\Uid\Uuid;
-use Doctrine\Common\Collections\Collection;
 use App\Domain\Exception\ValidationException;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Uid\Uuid;
 
 class Team implements \Stringable
 {
@@ -23,21 +22,15 @@ class Team implements \Stringable
         private Collection $awayGames = new ArrayCollection(),
     ) {
         if (\mb_strlen($name) > 255) {
-            throw new ValidationException("Name must have less than 255 characters.");
+            throw new ValidationException('Name must have less than 255 characters.');
         }
     }
 
-    /**
-     * @return Uuid
-     */
     public function getId(): Uuid
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;

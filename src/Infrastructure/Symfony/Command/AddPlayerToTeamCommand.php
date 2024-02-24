@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Symfony\Command;
 
-use App\Domain\Entity\Team;
 use App\Domain\Entity\Player;
+use App\Domain\Entity\Team;
+use App\Domain\Repository\PlayerRepository;
+use App\Domain\Repository\TeamRepository;
 use App\UseCase\AddPlayerToTeam\Request;
 use App\UseCase\AddPlayerToTeam\UseCase;
-use App\Domain\Repository\TeamRepository;
-use App\Domain\Repository\PlayerRepository;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: self::COMMAND_NAME,
@@ -25,7 +25,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 )]
 final class AddPlayerToTeamCommand extends Command
 {
-    public const COMMAND_NAME = "app:team:add:player";
+    public const COMMAND_NAME = 'app:team:add:player';
 
     public function __construct(
         private readonly UseCase $useCase,
@@ -37,7 +37,6 @@ final class AddPlayerToTeamCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-
         /** @var QuestionHelper */
         $helper = $this->getHelper('question');
 
@@ -60,6 +59,7 @@ final class AddPlayerToTeamCommand extends Command
             ));
         } catch (\Exception $ex) {
             $io->error($ex->getMessage());
+
             return Command::FAILURE;
         }
 

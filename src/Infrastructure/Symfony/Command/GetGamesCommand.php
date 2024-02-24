@@ -8,12 +8,12 @@ use App\Domain\Entity\Team;
 use App\Domain\Repository\TeamRepository;
 use App\UseCase\GetGames\Request;
 use App\UseCase\GetGames\UseCase;
-use Symfony\Component\Console\Helper\Table;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
+use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 
@@ -24,7 +24,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 )]
 final class GetGamesCommand extends Command
 {
-    public const COMMAND_NAME = "app:game:list";
+    public const COMMAND_NAME = 'app:game:list';
 
     public function __construct(
         private readonly UseCase $useCase,
@@ -32,7 +32,6 @@ final class GetGamesCommand extends Command
     ) {
         parent::__construct();
     }
-
 
     protected function configure(): void
     {
@@ -44,7 +43,6 @@ final class GetGamesCommand extends Command
                 'Select a team to view its upcoming or past games.'
             );
     }
-
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

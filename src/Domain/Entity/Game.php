@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
-use Symfony\Component\Uid\Uuid;
 use App\Domain\Exception\ValidationException;
+use Symfony\Component\Uid\Uuid;
 
 /**
- * Match is PHP reserved word
+ * Match is PHP reserved word.
  */
 class Game implements \Stringable
 {
@@ -19,7 +19,7 @@ class Game implements \Stringable
         private readonly Team $awayTeam
     ) {
         if (\mb_strlen($name) > 255) {
-            throw new ValidationException("Name must have less than 255 characters.");
+            throw new ValidationException('Name must have less than 255 characters.');
         }
     }
 

@@ -17,7 +17,7 @@ class GetPlayersTest extends KernelTestCase
 
         $command = $application->find(GetPlayersCommand::COMMAND_NAME);
         $commandTester = new CommandTester($command);
-        $r = $commandTester->execute(array());
+        $r = $commandTester->execute([]);
         $this->assertSame(Command::SUCCESS, $r);
     }
 }

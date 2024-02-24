@@ -22,23 +22,17 @@ class Player implements \Stringable
     {
         $this->id = $id;
         if (mb_strlen($name) > 255) {
-            throw new ValidationException("Name must have less than 255 characters.");
+            throw new ValidationException('Name must have less than 255 characters.');
         }
         $this->name = $name;
         $this->teams = $teams;
     }
 
-    /**
-     * @return Uuid
-     */
     public function getId(): Uuid
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
