@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Infrastructure\Symfony\Command;
 
-use App\UseCase\GetPlayers\Request;
-use App\UseCase\GetPlayers\UseCase;
+use App\UseCase\GetTeams\Request;
+use App\UseCase\GetTeams\UseCase;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -12,12 +14,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(
     name: self::COMMAND_NAME,
-    description: 'Display players.',
+    description: 'Display teams.',
     hidden: false
 )]
-final class GetPlayersCommand extends Command
+final class GetTeamsCommand extends Command
 {
-    public const COMMAND_NAME = 'app:player:list';
+    public const COMMAND_NAME = 'app:team:list';
 
     public function __construct(private readonly UseCase $useCase)
     {
@@ -29,15 +31,12 @@ final class GetPlayersCommand extends Command
         $response = $this->useCase->execute(new Request());
 
         $table = new Table($output);
-        $rows = [];
-        foreach ($response->getPlayers() as $player) {
-            $rows[] = [$player->getId(), $player->getName()];
-        }
+
         $table
             ->setHeaders(['Id', 'Name'])
-            ->setRows($rows);
+            ->setRows($response->getTeams());
         $table->render();
 
-        return Command::SUCCESS;
+        return self::SUCCESS;
     }
 }

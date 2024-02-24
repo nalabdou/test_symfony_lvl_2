@@ -1,6 +1,8 @@
 <?php
 
-namespace App\UseCase\GetPlayers;
+declare(strict_types=1);
+
+namespace App\UseCase\GetTeams;
 
 final class Request
 {

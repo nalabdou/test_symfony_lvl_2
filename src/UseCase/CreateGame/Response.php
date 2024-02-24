@@ -1,6 +1,8 @@
 <?php
 
-namespace App\UseCase\CreatePlayer;
+declare(strict_types=1);
+
+namespace App\UseCase\CreateGame;
 
 use Symfony\Component\Uid\Uuid;
 

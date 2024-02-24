@@ -23,6 +23,13 @@ stop: ## Stop all the containers that belongs to the project
 	symfony server:stop
 	$(DOCKER_COMPOSE) down
 
+tu: ## Execute phpunit tests
+	$(DOCKER_COMPOSE) up -d
+	php bin/console doctrine:database:drop --if-exists --force -n
+	php bin/console doctrine:database:create -n
+	php bin/console doctrine:migrations:migrate -n
+	php bin/phpunit --fail-on-warning
+
 define TXT_ON_START
 ===================================
 ===================================
