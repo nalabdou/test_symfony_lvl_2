@@ -9,4 +9,14 @@ use App\Domain\Entity\Team;
 interface TeamRepository
 {
     public function create(Team $player, ?bool $flush = false): void;
+
+    /**
+     * @return Team[]
+     */
+    public function findAll(): array;
+
+    /**
+     * @return Team[]
+     */
+    public function findToDisplay(): array;
 }

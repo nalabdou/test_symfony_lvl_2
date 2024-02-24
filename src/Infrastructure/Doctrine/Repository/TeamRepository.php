@@ -7,6 +7,7 @@ namespace App\Infrastructure\Doctrine\Repository;
 use App\Domain\Entity\Team;
 use App\Domain\Repository\TeamRepository as RepositoryTeamRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -28,5 +29,24 @@ final class TeamRepository extends ServiceEntityRepository implements Repository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+    /**
+     * @return Team[]
+     */
+    public function findAll(): array
+    {
+        return $this->findBy(criteria: [], orderBy: ['name' => Criteria::ASC]);
+    }
+
+    /**
+     * @return Team[]
+     */
+    public function findToDisplay(): array
+    {
+        return $this->createQueryBuilder('t')
+            ->select('t.id, t.name')
+            ->orderBy('t.name', Criteria::ASC)
+            ->getQuery()
+            ->getArrayResult();
     }
 }
