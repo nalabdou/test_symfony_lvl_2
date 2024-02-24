@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Infrastructure\Doctrine\Repository;
 
 use App\Domain\Entity\Game;
-use App\Domain\Repository\GameRepository as RepositoryGameRepository;
+use App\Domain\Entity\Team;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Domain\Repository\GameRepository as RepositoryGameRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
@@ -28,5 +30,28 @@ class GameRepository extends ServiceEntityRepository implements RepositoryGameRe
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function findAll(): array
+    {
+        return $this->findBy(criteria: [], orderBy: ['name' => Criteria::ASC]);
+    }
+
+    public function findToDisplay(?Team $team = null): array
+    {
+        $qb = $this->createQueryBuilder('g')
+            ->select('g.id, g.name, gh.name as home, ga.name as away')
+            ->join('g.homeTeam', 'gh')
+            ->join('g.awayTeam', 'ga')
+            ->orderBy('g.name', Criteria::ASC);
+
+        if (!\is_null($team)) {
+            $qb
+                ->orWhere('gh = :team')
+                ->orWhere('ga = :team')
+                ->setParameter('team', $team);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 }

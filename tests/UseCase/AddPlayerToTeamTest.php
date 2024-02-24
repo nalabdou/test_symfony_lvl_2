@@ -34,6 +34,8 @@ class AddPlayerToTeamTest extends KernelTestCase
 
     public function randomInputs(): \Generator
     {
-        yield [[\random_int(0, 19), \random_int(0, 18)]];
+        for ($i = 0; $i < 18; $i++) {
+            yield [[\random_int(0, 19), \random_int(0, 18)]];
+        }
     }
 }

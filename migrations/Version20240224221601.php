@@ -7,19 +7,15 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20240224221601 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Add game entity';
     }
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE game (id UUID NOT NULL, home_team_id UUID DEFAULT NULL, away_team_id UUID DEFAULT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_232B318C5E237E06 ON game (name)');
         $this->addSql('CREATE INDEX IDX_232B318C9C4C13F6 ON game (home_team_id)');
@@ -33,8 +29,6 @@ final class Version20240224221601 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE SCHEMA public');
         $this->addSql('ALTER TABLE game DROP CONSTRAINT FK_232B318C9C4C13F6');
         $this->addSql('ALTER TABLE game DROP CONSTRAINT FK_232B318C45185D02');
         $this->addSql('DROP TABLE game');
